@@ -1,0 +1,30 @@
+.main{
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main .detail{
+    border: 2px solid black;
+    width: fit-content;
+    padding: 50px;
+}
+.main .detail h3{
+    color: darkblue;
+    margin: 20px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.main .detail a{
+    text-decoration: none;
+    color: white;
+    background-color: blue;
+    margin-left: 30px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+.main .detail a:hover{
+    background-color: cornflowerblue;
+
+}

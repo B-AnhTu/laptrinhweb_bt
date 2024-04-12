@@ -1,0 +1,52 @@
+header, footer{
+    background-color: bisque;
+}
+.navbar{
+    border: 2px solid black;
+    padding: 5px 0;
+}
+form{
+    margin: 0;
+    right: 0;
+}
+ul{
+    padding: 0;
+    list-style: none;
+    top: 0;
+    margin: 0;
+    text-align: center;
+}
+.action{
+    list-style: none;
+    top: 0;
+    margin: 0;
+}
+li{
+    display: inline-block;
+    padding: 3px;
+}
+.main{
+    margin: 50px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main .list{
+    padding: 30px;
+}
+.main .list h3{
+    color: rgb(255, 123, 0);
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+table, th, td{
+    text-align: center;
+    padding: 5px;
+    border: 2px solid black;
+}
+footer{
+    border: 2px solid black;
+    text-align: center;
+    padding: 10px;
+}

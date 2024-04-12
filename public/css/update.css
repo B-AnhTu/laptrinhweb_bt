@@ -1,0 +1,95 @@
+header, footer{
+    background-color: bisque;
+}
+.navbar{
+    border: 2px solid black;
+    padding: 5px 0;
+}
+form{
+    margin: 0;
+    right: 0;
+}
+ul{
+    list-style: none;
+    top: 0;
+    margin: 0;
+    text-align: center;
+}
+li{
+    display: inline-block;
+    padding: 3px;
+}
+input{
+    margin: 5px 10px;
+}
+input[type=text], input[type=password], input[type=email]{
+    width: 50%;
+}
+
+.main{
+    margin: 50px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main .login{
+    border: 2px solid black;
+    width: fit-content;
+    padding: 30px;
+}
+.main .login h1{
+    color: red;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+input[type=submit]{
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+input[type=submit]:hover{
+    background-color: blueviolet;
+}
+a{
+    text-decoration: none;
+    margin-right: 5px;
+}
+footer{
+    border: 2px solid black;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Code phần update */
+.main .update{
+    border: 2px solid black;
+    width: fit-content;
+    padding: 30px;
+}
+.main .update h1{
+    color: red;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+input{
+    margin: 5px 10px;
+}
+input[type=text], input[type=password], input[type=email]{
+    width: 50%;
+    text-align: center;
+}
+input[type=submit]{
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+input[type=submit]:hover{
+    background-color: blueviolet;
+}
+a{
+    text-decoration: none;
+    margin-right: 5px;
+}
