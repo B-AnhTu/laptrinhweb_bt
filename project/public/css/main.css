@@ -1,0 +1,31 @@
+.navbar-nav{
+    display: flex; /* Sử dụng flexbox để căn giữa các mục */
+    justify-content: center; /* Căn giữa các mục */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+.main{
+    margin: 50px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main .list{
+    padding: 30px;
+}
+.main .list h3{
+    color: rgb(255, 123, 0);
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+table, th, td{
+    text-align: center;
+    padding: 5px;
+    border: 2px solid black;
+}
+.bg-footer{
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,23,121,1) 22%, rgba(24,8,138,1) 39%, rgba(7,88,154,1) 55%, rgba(6,112,158,1) 64%, rgba(0,255,173,1) 100%);
+}
+footer{
+    padding: 20px 0;
+}
