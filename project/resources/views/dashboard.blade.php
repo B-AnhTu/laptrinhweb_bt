@@ -11,12 +11,12 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white align-item-center mb-3">
+        <nav class="navbar navbar-expand-lg navbar-light align-item-center mb-3 text-white">
             <div class="container-fluid">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse border border-2" id="navbarSupportedContent">
+              <div class="collapse navbar-collapse border border-2 bg-header" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 p-1 text-center">
                     
                   <li class="nav-item">
@@ -47,7 +47,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    © 2024 - Bùi Anh Tú
+                    © 2024 - Bùi Anh Tú - 22211TT4707
                 </div>
             </div>
         </div>
