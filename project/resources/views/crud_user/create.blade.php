@@ -17,6 +17,7 @@
                                         <span class="text-danger">{{ $errors->first('name') }}</span>
                                     @endif
                                 </div>
+
                                 <div class="form-group mb-3">
                                     <input type="text" placeholder="Email" id="email_address" class="form-control"
                                            name="email" required autofocus>
@@ -24,6 +25,7 @@
                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
+
                                 <div class="form-group mb-3">
                                     <input type="password" placeholder="Password" id="password" class="form-control"
                                            name="password" required>
@@ -31,13 +33,12 @@
                                         <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
+
                                 <div class="form-group mb-3">
                                     <input type="text" placeholder="Phone" id="phone" class="form-control"
-                                           name="phone">
-                                    @if ($errors->has('phone'))
-                                        <span class="text-danger">{{ $errors->first('phone') }}</span>
-                                    @endif
+                                            name="phone">
                                 </div>
+
                                 <div class="form-group mb-3">
                                     <input type="file" id="image" class="form-control"
                                            name="image">

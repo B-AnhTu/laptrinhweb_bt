@@ -35,6 +35,14 @@
                                     @endif
                                 </div>
                                 <div class="form-group mb-3">
+                                    <input type="text" placeholder="Phone" id="phone" class="form-control"
+                                           value="{{ $user->phone }}"
+                                           name="phone" required autofocus>
+                                    @if ($errors->has('phone'))
+                                        <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group mb-3">
                                     <input type="file" id="image" class="form-control"
                                            name="image" required>
                                     @if ($errors->has('image'))

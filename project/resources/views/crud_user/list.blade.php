@@ -10,6 +10,7 @@
                             <th>#</th>
                             <th>Username</th>
                             <th>Email</th>
+                            <th>Phone</th>
                             <th>Hinh anh</th>
                             <th>Thao tác</th>
                         </tr>
@@ -20,6 +21,7 @@
                                 <th>{{ $user->id }}</th>
                                 <th>{{ $user->name }}</th>
                                 <th>{{ $user->email }}</th>
+                                <th>{{ $user->phone }}</th>
                                 <th><img class="img-list" src="{{ asset('images/' . $user->image) }}" alt="User Image"></th>
                                 <th>
                                     <a href="{{ route('user.readUser', ['id' => $user->id]) }}">View</a> |
