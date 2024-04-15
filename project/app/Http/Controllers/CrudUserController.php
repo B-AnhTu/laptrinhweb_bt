@@ -18,6 +18,7 @@ class CrudUserController extends Controller
      */
     public function login()
     {
+        //Đường dẫn đến trang login
         return view('crud_user.login');
     }
 
@@ -26,18 +27,19 @@ class CrudUserController extends Controller
      */
     public function authUser(Request $request)
     {
+        //Kiểm tra các trường có được nhập đầy đủ không
         $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
-
+        //Lấy dữ liệu của trường email, password duy nhất
         $credentials = $request->only('email', 'password');
-
+        // Kiểm tra phiên đăng nhập có hợp lệ không, nếu thành công chuyển đường dẫn sang trang list
         if (Auth::attempt($credentials)) {
             return redirect()->intended('list')
                 ->withSuccess('Signed in');
         }
-
+        //Nếu đăng nhập thất bại thì hiển thị lỗi
         return redirect("login")->withSuccess('Login details are not valid');
     }
 
@@ -46,6 +48,7 @@ class CrudUserController extends Controller
      */
     public function createUser()
     {
+        //Đường dẫn đến trang tạo người dùng
         return view('crud_user.create');
     }
 
@@ -54,6 +57,7 @@ class CrudUserController extends Controller
      */
     public function postUser(Request $request)
     {
+        //Kiểm tra validation cho các trường dữ liệu
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -70,13 +74,14 @@ class CrudUserController extends Controller
             $request->image->move(public_path('images'), $imageName);
             $data['image'] = $imageName;
         }
+        // Tạo người dùng mới
         $check = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
         ]);
-
+        //Trở lại trang login và hiển thị thông báo người dùng đăng ký thành công
         return redirect()->route('login')->with('success', 'User registered successfully!');
     }
 
@@ -84,9 +89,10 @@ class CrudUserController extends Controller
      * View user detail page
      */
     public function readUser(Request $request) {
+        //Lấy id của người dùng cần đọc và tìm đúng id đó
         $user_id = $request->get('id');
         $user = User::find($user_id);
-
+        //Đường dẫn đến trang view với biến truyền đi là messi
         return view('crud_user.read', ['messi' => $user]);
     }
 
@@ -94,9 +100,10 @@ class CrudUserController extends Controller
      * Delete user by id
      */
     public function deleteUser(Request $request) {
+        //Lấy id của người dùng cần xóa
         $user_id = $request->get('id');
         $user = User::destroy($user_id);
-
+        //Trở lại trang danh sách
         return redirect("list")->withSuccess('You have signed-in');
     }
 
@@ -105,9 +112,10 @@ class CrudUserController extends Controller
      */
     public function updateUser(Request $request)
     {
+        //Tìm id của user cần sửa
         $user_id = $request->get('id');
         $user = User::find($user_id);
-
+        //Chuyển đến trang cập nhật
         return view('crud_user.update', ['user' => $user]);
     }
 
@@ -116,21 +124,22 @@ class CrudUserController extends Controller
      */
     public function postUpdateUser(Request $request)
     {
+        //Lấy tất cả thông tin trong database
         $input = $request->all();
-
+        //Kiểm tra các trường dữ liệu hợp lệ
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Adjust validation rules for image
         ]);
-        // Handle image upload
+        // Tải hình ảnh lên
         if ($request->hasFile('image')) {
             $imageName = time().'.'.$request->image->extension();  
             $request->image->move(public_path('images'), $imageName);
         }
 
-        // Update user data
+        // Cập nhật dữ liệu người dùng
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->email = $request->email;
@@ -155,8 +164,10 @@ class CrudUserController extends Controller
      */
     public function listUser()
     {
+        //Kiểm tra người dùng đã đăng nhập chưa, nếu chưa thì chuyển người dùng đến trang login để đăng nhập
+        
         if(Auth::check()){
-            $users = User::paginate(3); // Phân trang, mỗi trang có 10 mục
+            $users = User::paginate(3); // Phân trang, mỗi trang có 3 mục
             return view('crud_user.list', ['users' => $users]);
         }
 
@@ -167,9 +178,10 @@ class CrudUserController extends Controller
      * Sign out
      */
     public function signOut() {
+        //Đăng xuất khỏi phiên đăng nhập hiện tại
         Session::flush();
         Auth::logout();
-
+        //Quay lại trang login
         return Redirect('login');
     }
 }
