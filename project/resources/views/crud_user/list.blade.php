@@ -30,9 +30,9 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="col">
+                <div class="col mt-3">
                     <!-- Hiển thị thanh phân trang -->
-                    {{ $users->links() }}
+                    {{ $users->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         </div>
