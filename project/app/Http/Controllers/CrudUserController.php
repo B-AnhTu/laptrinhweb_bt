@@ -49,7 +49,7 @@ class CrudUserController extends Controller
     public function createUser()
     {
         //Đường dẫn đến trang tạo người dùng
-        return view('crud_user.create');
+        return view('crud_user.registration');
     }
 
     /**
@@ -57,16 +57,25 @@ class CrudUserController extends Controller
      */
     public function postUser(Request $request)
     {
+        
+        
         //Kiểm tra validation cho các trường dữ liệu
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'phone' => 'nullable|string|max:15',
+            'phone' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $data = $request->all();
+
+        // Kiểm tra xem 'phone' có được gửi từ form hay không
+        if (!empty($data['phone'])) {
+            // Nếu 'phone' không được gửi từ form, gán giá trị mặc định hoặc null cho 'phone'
+            $data['phone'] = null;
+        }
+
 
         // Xử lý tải lên hình ảnh
         if ($request->hasFile('image')) {
@@ -74,15 +83,17 @@ class CrudUserController extends Controller
             $request->image->move(public_path('images'), $imageName);
             $data['image'] = $imageName;
         }
+
         // Tạo người dùng mới
         $check = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
+            'image' => $data['image'],
         ]);
         //Trở lại trang login và hiển thị thông báo người dùng đăng ký thành công
-        return redirect()->route('login')->with('success', 'User registered successfully!');
+        return redirect("login")->withSuccess('User registered successfully!');
     }
 
     /**
@@ -131,6 +142,7 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
+            'phone' => 'nullable|string|max:15',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Adjust validation rules for image
         ]);
         // Tải hình ảnh lên
@@ -143,6 +155,7 @@ class CrudUserController extends Controller
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->phone = $request->phone;
         $user->password = bcrypt($request->password);
         if ($request->hasFile('image')) {
             $user->image = $imageName;
