@@ -44,3 +44,11 @@ footer{
     height: 60px;
     border: 1px solid red;
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
