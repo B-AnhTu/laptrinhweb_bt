@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
  */
 class CrudUserController extends Controller
 {
-
     /**
      * Login page
      */
@@ -59,16 +58,26 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'phone' => 'nullable|string|max:15',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $data = $request->all();
+
+        // Xử lý tải lên hình ảnh
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $data['image'] = $imageName;
+        }
         $check = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'phone' => $data['phone'],
         ]);
 
-        return redirect("login");
+        return redirect()->route('login')->with('success', 'User registered successfully!');
     }
 
     /**
@@ -113,13 +122,30 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Adjust validation rules for image
         ]);
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('images'), $imageName);
+        }
 
-       $user = User::find($input['id']);
-       $user->name = $input['name'];
-       $user->email = $input['email'];
-       $user->password = $input['password'];
-       $user->save();
+        // Update user data
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        if ($request->hasFile('image')) {
+            $user->image = $imageName;
+        }
+        $user->save();
+
+
+        // $user = User::find($input['id']);
+        // $user->name = $input['name'];
+        // $user->email = $input['email'];
+        // $user->password = $input['password'];
+        // $user->save();
 
         return redirect("list")->withSuccess('You have signed-in');
     }
@@ -130,7 +156,7 @@ class CrudUserController extends Controller
     public function listUser()
     {
         if(Auth::check()){
-            $users = User::all();
+            $users = User::paginate(3); // Phân trang, mỗi trang có 10 mục
             return view('crud_user.list', ['users' => $users]);
         }
 

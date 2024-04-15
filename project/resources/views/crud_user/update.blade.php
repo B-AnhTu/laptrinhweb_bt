@@ -8,7 +8,7 @@
                     <div class="card">
                         <h3 class="card-header text-center">Update User</h3>
                         <div class="card-body">
-                            <form action="{{ route('user.postUpdateUser') }}" method="POST">
+                            <form action="{{ route('user.postUpdateUser') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input name="id" type="hidden" value="{{$user->id}}">
                                 <div class="form-group mb-3">
@@ -32,6 +32,13 @@
                                            name="password" required>
                                     @if ($errors->has('password'))
                                         <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="file" id="image" class="form-control"
+                                           name="image" required>
+                                    @if ($errors->has('image'))
+                                        <span class="text-danger">{{ $errors->first('image') }}</span>
                                     @endif
                                 </div>
 

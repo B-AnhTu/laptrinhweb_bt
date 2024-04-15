@@ -39,3 +39,8 @@ footer{
 .bg-header{
     background: linear-gradient(90deg, rgba(107,22,173,1) 0%, rgba(9,54,121,1) 22%, rgba(8,33,138,1) 39%, rgba(7,56,154,1) 55%, rgba(6,97,158,1) 64%, rgba(3,133,172,1) 81%, rgba(0,161,255,1) 100%);
 }
+.img-list{
+    width: 60px;
+    height: 60px;
+    border: 1px solid red;
+}

@@ -10,6 +10,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Hinh anh</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -17,6 +18,8 @@
                             <td>{{$messi->id}}</td>
                             <td>{{$messi->name}}</td>
                             <td>{{$messi->email}}</td>
+                            <td><img class="img-list" src="{{ asset('images/' . $messi->image) }}" alt="User Image"></td>
+
                         </tr>
                     </tbody>
                 </table>

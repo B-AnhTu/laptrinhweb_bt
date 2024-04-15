@@ -10,6 +10,7 @@
                             <th>#</th>
                             <th>Username</th>
                             <th>Email</th>
+                            <th>Hinh anh</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
@@ -19,6 +20,7 @@
                                 <th>{{ $user->id }}</th>
                                 <th>{{ $user->name }}</th>
                                 <th>{{ $user->email }}</th>
+                                <th><img class="img-list" src="{{ asset('images/' . $user->image) }}" alt="User Image"></th>
                                 <th>
                                     <a href="{{ route('user.readUser', ['id' => $user->id]) }}">View</a> |
                                     <a href="{{ route('user.updateUser', ['id' => $user->id]) }}">Edit</a> |
@@ -28,7 +30,12 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="col">
+                    <!-- Hiển thị thanh phân trang -->
+                    {{ $users->links() }}
+                </div>
             </div>
         </div>
+
     </main>
 @endsection
