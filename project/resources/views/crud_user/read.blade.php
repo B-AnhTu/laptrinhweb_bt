@@ -16,11 +16,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{$messi->id}}</td>
-                            <td>{{$messi->name}}</td>
-                            <td>{{$messi->email}}</td>
-                            <td>{{$messi->phone}}</td>
-                            <td><img class="img-list" src="{{ asset('images/' . $messi->image) }}" alt="User Image"></td>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->phone}}</td>
+                            <td><img class="img-list" src="{{ asset('images/' . $user->image) }}" alt="User Image"></td>
 
                         </tr>
                     </tbody>
@@ -28,4 +28,27 @@
             </div>
         </div>
     </main>
+    <div class="container">
+<div class="row">
+    <h4>Danh sách bài viết đã viết</h4>
+    <a href="{{route('post.createPost')}}"><button class="btn-add">Thêm bài viết</button></a>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Post name</th>
+        </thead>
+        <tbody>
+            @foreach($user->posts as $post)
+            <tr>
+                <td>{{ $post->post_id }}</td>
+                <td>{{ $post->post_name }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <h4>Danh sách sở thích</h4>
+</div>
+</div>
 @endsection

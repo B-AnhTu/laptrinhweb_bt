@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CrudUserController;
+use App\Http\Controllers\UserPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,16 @@ Route::get('signout', [CrudUserController::class, 'signOut'])->name('signout');
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Post
+Route::get('createPost', [UserPostController::class, 'createPost'])->name('post.createPost');
+Route::post('createPost', [UserPostController::class, 'postUserPost'])->name('post.postUserPost');
+
+Route::get('readPost', [UserPostController::class, 'readPost'])->name('post.readPost');
+
+Route::get('deletePost', [UserPostController::class, 'deletePost'])->name('post.deletePost');
+
+Route::get('updatePost', [UserPostController::class, 'updatePost'])->name('post.updatePost');
+Route::post('updatePost', [UserPostController::class, 'postUpdatePost'])->name('post.postUpdatePost');
+
+Route::get('listPost', [UserPostController::class, 'listPost'])->name('post.listPost');

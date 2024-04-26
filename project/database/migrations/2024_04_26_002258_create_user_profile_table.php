@@ -12,15 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_profile', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id'); // Mã user kiểu int
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Tạo khóa ngoại với bảng users
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('sex');
-            $table->string('phone');
-            $table->string('address');
-
+            $table->increments('user_profile_id');
+            $table->integer('user_id');
+            $table->string('first_name', 55);
+            $table->string('last_name', 55);
+            $table->tinyInteger('sex')->nullable();
+            $table->string('phone', 25)->nullable();
+            $table->string('address', 255)->nullable();
             $table->timestamps();
         });
     }

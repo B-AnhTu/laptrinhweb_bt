@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
-            //$table->id();
-            $table->increments('post_id');
-            $table->integer('user_id');
-            $table->string('post_name');
-            $table->text('post_description')->nullable();
+        Schema::create('favorities', function (Blueprint $table) {
+            $table->increments('favorite_id');
+            $table->string('favorite_name', 255);
+            $table->text('favorite_description');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('favorities');
     }
 };
