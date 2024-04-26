@@ -41,6 +41,13 @@ class CrudUserController extends Controller
         }
         //Nếu đăng nhập thất bại thì hiển thị lỗi
         return redirect("login")->withSuccess('Login details are not valid');
+
+        // // Kiểm tra xem cả hai trường đều không rỗng
+        // if ($request->filled(['email', 'password'])) {
+        //     return redirect()->intended('list')->withSuccess('Signed in directly');
+        // }
+        // return redirect("login")->withError('Please provide both email and password');
+
     }
 
     /**
@@ -69,12 +76,6 @@ class CrudUserController extends Controller
         ]);
 
         $data = $request->all();
-
-        // Kiểm tra xem 'phone' có được gửi từ form hay không
-        if (!empty($data['phone'])) {
-            // Nếu 'phone' không được gửi từ form, gán giá trị mặc định hoặc null cho 'phone'
-            $data['phone'] = null;
-        }
 
 
         // Xử lý tải lên hình ảnh

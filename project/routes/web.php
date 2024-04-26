@@ -14,6 +14,7 @@ use App\Http\Controllers\CrudUserController;
 |
 */
 
+// CRUD_User
 Route::get('dashboard', [CrudUserController::class, 'dashboard']);
 
 Route::get('login', [CrudUserController::class, 'login'])->name('login');
