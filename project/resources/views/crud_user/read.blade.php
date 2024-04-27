@@ -11,6 +11,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Sở thích</th>
                             <th>Hinh anh</th>
                         </tr>
                     </thead>
@@ -20,6 +21,7 @@
                             <td>{{$messi->name}}</td>
                             <td>{{$messi->email}}</td>
                             <td>{{$messi->phone}}</td>
+                            <td>{{$messi->favorities}}</td>
                             <td><img class="img-list" src="{{ asset('images/' . $messi->image) }}" alt="User Image"></td>
 
                         </tr>

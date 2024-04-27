@@ -143,6 +143,7 @@ class CrudUserController extends Controller
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
             'phone' => 'nullable|string|max:15',
+            'favorities' => 'nullable|string|max:50',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Adjust validation rules for image
         ]);
         // Tải hình ảnh lên
@@ -156,6 +157,7 @@ class CrudUserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->favorities = $request->favorities;
         $user->password = bcrypt($request->password);
         if ($request->hasFile('image')) {
             $user->image = $imageName;

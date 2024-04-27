@@ -36,3 +36,5 @@ Route::get('signout', [CrudUserController::class, 'signOut'])->name('signout');
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('hacker/xss', 'App\Http\Controllers\XssController@handleXss');
