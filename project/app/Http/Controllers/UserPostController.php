@@ -53,7 +53,7 @@ class UserPostController extends Controller
 
         $user->posts()->save($post);
         //Trở lại trang danh sách
-        return redirect()->route('post.listPost')->withSuccess('Post created successfully!');
+        return redirect()->route('user.list')->withSuccess('Post created successfully!');
     }
 
     /**

@@ -13,4 +13,10 @@ class Favorities extends Model
         'favorite_name',
         'favorite_description'
     ];
+
+    protected $table = 'favorities';
+
+    protected $primaryKey = 'favorite_id';
+
+    public $incrementing = true;
 }

@@ -29,19 +29,28 @@
         </div>
     </main>
     <div class="container">
-<div class="row">
-    <h4>Danh sách bài viết đã viết</h4>
-    <a href="{{route('post.createPost')}}"><button class="btn-add">Thêm bài viết</button></a>
+        <div class="row">
+            <div class="col">
+                <h4>Danh sách bài viết đã viết</h4>
+                <a href="{{route('post.createPost')}}"><button class="btn-add">Thêm bài viết</button></a>
+            </div>
+            
     <table>
         <thead>
             <th>ID</th>
             <th>Post name</th>
+            <th>Action</th>
         </thead>
         <tbody>
             @foreach($user->posts as $post)
             <tr>
                 <td>{{ $post->post_id }}</td>
                 <td>{{ $post->post_name }}</td>
+                <td>
+                    <a href="{{ route('post.readPost', ['id' => $post->post_id])}}"><i class="fa-solid fa-eye"></i></a> |
+                    <a href="{{ route('post.updatePost', ['id' => $post->post_id]) }}"><i class="fa-solid fa-pen"></i></a> |
+                    <a href="{{ route('post.deletePost', ['id' => $post->post_id]) }}"><i class="fa-solid fa-trash"></i></a>
+                </td>
             </tr>
             @endforeach
         </tbody>

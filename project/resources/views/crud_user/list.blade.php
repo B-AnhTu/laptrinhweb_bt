@@ -24,9 +24,9 @@
                                 <th>{{ $user->phone }}</th>
                                 <th><img class="img-list" src="{{ asset('images/' . $user->image) }}" alt="User Image"></th>
                                 <th>
-                                    <a href="{{ route('user.readUser', ['id' => $user->id]) }}">View</a> |
-                                    <a href="{{ route('user.updateUser', ['id' => $user->id]) }}">Edit</a> |
-                                    <a href="{{ route('user.deleteUser', ['id' => $user->id]) }}">Delete</a>
+                                    <a href="{{ route('user.readUser', ['id' => $user->id]) }}"><i class="fa-solid fa-eye"></i></a> |
+                                    <a href="{{ route('user.updateUser', ['id' => $user->id]) }}"><i class="fa-solid fa-pen"></i></a> |
+                                    <a href="{{ route('user.deleteUser', ['id' => $user->id]) }}"><i class="fa-solid fa-trash"></i></a>
                                 </th>
                             </tr>
                         @endforeach
@@ -34,7 +34,7 @@
                 </table>
                 <div class="col mt-3">
                     <!-- Hiển thị thanh phân trang -->
-                    {{ $users->links('pagination::bootstrap-5') }}
+                    {{ $users->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

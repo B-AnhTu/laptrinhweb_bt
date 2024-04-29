@@ -21,5 +21,6 @@ class FavoriteTableSeeder extends Seeder
             'favorite_name' => "Bóng chuyền",
             'favorite_description' => "Đây là một bộ môn thể theo sử dụng tay để chuyền bóng"
         ]);
+        
     }
 }
