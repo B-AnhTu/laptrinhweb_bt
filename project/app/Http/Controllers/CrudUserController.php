@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Hash;
 use Session;
 use App\Models\User;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -112,11 +113,31 @@ class CrudUserController extends Controller
      * Delete user by id
      */
     public function deleteUser(Request $request) {
-        //Lấy id của người dùng cần xóa
         $user_id = $request->get('id');
-        $user = User::destroy($user_id);
-        //Trở lại trang danh sách
-        return redirect("list")->withSuccess('You have signed-in');
+
+        $isDelete = false;
+        //Check existing post
+        $post = Posts::where('user_id', '=', $user_id)->first();
+
+        //Check existing favorite
+        $favorities = User::find($user_id)->favorities;
+
+        if (empty ($post) && $favorities->isEmpty()) {
+            $isDelete = true;
+        }
+
+        if ($isDelete) {
+            $user = User::destroy($user_id);
+
+        }
+
+        return redirect("crud_user.list")->withSuccess('Delete successful');
+
+        // //Lấy id của người dùng cần xóa
+        // $user_id = $request->get('id');
+        // $user = User::destroy($user_id);
+        // //Trở lại trang danh sách
+        // return redirect("list")->withSuccess('You have signed-in');
     }
 
     /**
@@ -153,7 +174,7 @@ class CrudUserController extends Controller
         }
 
         // Cập nhật dữ liệu người dùng
-        $user = User::find($request->id);
+        $user = User::find($request->user_id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;

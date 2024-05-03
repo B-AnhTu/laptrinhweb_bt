@@ -11,7 +11,6 @@ class Posts extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'post_name',
         'post_description'
     ];
@@ -25,7 +24,7 @@ class Posts extends Model
      * Relationship
      * @return BelongsTo
      */
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

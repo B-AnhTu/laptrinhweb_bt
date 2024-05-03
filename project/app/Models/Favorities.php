@@ -19,4 +19,8 @@ class Favorities extends Model
     protected $primaryKey = 'favorite_id';
 
     public $incrementing = true;
+
+    public function favorities(){
+        return $this->belongsToMany(User::class);
+    }
 }

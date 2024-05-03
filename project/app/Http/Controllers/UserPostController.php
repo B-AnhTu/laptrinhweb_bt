@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Hash;
-use Session;
 use App\Models\Posts;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -52,8 +50,8 @@ class UserPostController extends Controller
         ]);
 
         $user->posts()->save($post);
-        //Trở lại trang danh sách
-        return redirect()->route('user.list')->withSuccess('Post created successfully!');
+        // Sau khi cập nhật thành công, redirect về trang read của user
+        return redirect()->route('user.read', ['user_id' => $post->user_id])->withSuccess('Post updated successfully!');
     }
 
     /**
@@ -61,12 +59,13 @@ class UserPostController extends Controller
      */
     public function readPost(Request $request)
     {
-        //Lấy id của bài post cần đọc và tìm đúng id đó
-        $post_id = $request->get('post_id');
-        $post = Posts::find($post_id);
-        //Đường dẫn đến trang read với biến truyền đi là post
-        return view('user_post.read', ['post' => $post]);
-    }
+        // // Lấy id của bài post cần đọc và tìm đúng id đó
+        // $post_id = $request->get('post_id');
+        // $post = Posts::find($post_id);
+        // // Đường dẫn đến trang read với biến truyền đi là post và thông tin về người dùng
+        // return view('user_post.read', ['post' => $post]);
+
+        }
 
     /**
      * Show the form for editing the specified resource.
@@ -74,16 +73,25 @@ class UserPostController extends Controller
     public function updatePost(Request $request)
     {
         //Tìm id của post cần sửa
-        $post_id = $request->get('post_id');
-        $post = Posts::find($post_id);
-        //Chuyển đến trang update
+        $post_id = $request->get('id');
+        $post = Posts::where('post_id', $post_id)
+                 ->where('user_id', auth()->id())
+                 ->first();
+        // Kiểm tra xem post có tồn tại không
+        if (!$post) {
+            // Nếu không tìm thấy post hoặc post không thuộc về người dùng hiện tại, 
+            // bạn có thể xử lý tùy ý, ví dụ: thông báo lỗi hoặc chuyển hướng.
+            return redirect()->back()->withErrors(['message' => 'Post not found or you do not have permission to update it.']);
+        }
+
+        // Trả về view cập nhật bài viết với dữ liệu của post
         return view('user_post.update', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function postUpdatePost(Request $request, string $id)
+    public function postUpdatePost(Request $request)
     {
         $input = $request->all();
 
@@ -91,13 +99,22 @@ class UserPostController extends Controller
             'post_name' =>'required|max:50',
             'post_description' =>'required|max:100',
         ]);
+        $post_id = $request->get('post_id');
 
-        $post = Posts::find($request->id);
+        // Tìm bản ghi có ID tương ứng và thuộc về người dùng hiện tại
+        $post = Posts::where('post_id', $post_id)->where('user_id', auth()->id())->first();
+
+        if (!$post) {
+            // Nếu không tìm thấy bản ghi, bạn có thể xử lý theo ý của mình, ví dụ: thông báo lỗi hoặc chuyển hướng.
+            return redirect()->back()->withErrors(['message' => 'Post not found or you do not have permission to update it.']);
+        }
+
+        // $post = Posts::find($request->id);
         $post->post_name = $request->post_name;
         $post->post_description = $request->post_description;
         $post->save();
-        //Trở về trang danh sách với thông báo cập nhật thành công
-        return redirect("user_post.list")->withSuccess('Post updated successfully!');
+        // Trở về trang read của người dùng sau khi hoàn tất cập nhật
+    return redirect()->route('user.read', ['user_id' => $post->user_id])->withSuccess('Post updated successfully!');
     }
 
     /**
@@ -106,17 +123,16 @@ class UserPostController extends Controller
     public function deletePost(Request $request)
     {
         //Tìm id của post cần xóa
-    $post_id = $request->get('post_id');
-    $post = Posts::find($post_id);
+        $post_id = $request->get('post_id');
+        $post = Posts::find($post_id);
 
-    // Kiểm tra xem bài viết có tồn tại không
-    if ($post) {
-        $post->delete();
-        //Trở về trang danh sách với thông báo xóa thành công
-        return redirect("user_post.list")->withSuccess('Post deleted successfully!');
-    } else {
-        // Nếu không tìm thấy bài viết, có thể chuyển hướng người dùng đến một trang lỗi hoặc thực hiện xử lý khác tùy theo yêu cầu của ứng dụng.
-        return redirect()->back()->withError('Post not found.');
-    }
+        // Kiểm tra xem bài viết có tồn tại không
+        if ($post) {
+            $post->delete();
+            // Trở về trang danh sách bài viết với thông báo xóa thành công
+            return redirect()->route('user.list')->withSuccess('Post deleted successfully!');
+        } else {
+            // Xử lý nếu không tìm thấy bài viết
+        }
     }
 }
