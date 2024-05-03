@@ -57,7 +57,21 @@
     </table>
 </div>
 <div class="row">
-    <h4>Danh sách sở thích</h4>
-</div>
+    <h4>Danh sách sở thích (N-N)</h4>
+    <table>
+        <thead>
+        <th>ID</th>
+        <th>Favorite</th>
+        </thead>
+        <tbody>
+        @foreach($user->favorities as $favorite)
+            <tr>
+                <td>{{ $favorite->favorite_id }}</td>
+                <td>{{ $favorite->favorite_name }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    </div>
 </div>
 @endsection
