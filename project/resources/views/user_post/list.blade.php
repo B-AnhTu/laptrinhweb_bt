@@ -19,9 +19,9 @@
                             <td>{{ $post->post_name }}</td>
                             <td>{{ $post->post_description }}</td>
                             <td>
-                                <a href="{{route('post.readPost', ['id' => $post->id])}}"><i class="fa-solid fa-eye"></i></a>
-                                <a href="{{route('post.updatePost', ['id' => $post->id])}}"><i class="fa-solid fa-pen"></i></a>
-                                <a href="{{route('post.deletePost', ['id' => $post->id])}}"><i class="fa-solid fa-trash"></i></a>
+                                <a href="{{route('post.readPost', ['id' => $post->post_id])}}"><i class="fa-solid fa-eye"></i></a>
+                                <a href="{{route('post.updatePost', ['id' => $post->post_id])}}"><i class="fa-solid fa-pen"></i></a>
+                                <a href="{{route('post.deletePost', ['id' => $post->post_id])}}"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach

@@ -57,17 +57,26 @@
     </table>
 </div>
 <div class="row">
+<h4>Profile (1-1)</h4>
+        @if(!empty($user->profile))
+            First name : {{$user->profile->first_name}} <br>
+            Last name : {{$user->profile->last_name}} <br>
+        @endif
+</div>
+<div class="row">
     <h4>Danh sách sở thích (N-N)</h4>
     <table>
         <thead>
         <th>ID</th>
         <th>Favorite</th>
+        <th>Description</th>
         </thead>
         <tbody>
         @foreach($user->favorities as $favorite)
             <tr>
                 <td>{{ $favorite->favorite_id }}</td>
                 <td>{{ $favorite->favorite_name }}</td>
+                <td>{{ $favorite->favorite_description }}</td>
             </tr>
         @endforeach
         </tbody>
