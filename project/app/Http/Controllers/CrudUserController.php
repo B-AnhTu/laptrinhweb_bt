@@ -160,7 +160,7 @@ class CrudUserController extends Controller
         //Lấy tất cả thông tin trong database
         $input = $request->all();
         //Kiểm tra các trường dữ liệu hợp lệ
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
@@ -174,7 +174,7 @@ class CrudUserController extends Controller
         }
 
         // Cập nhật dữ liệu người dùng
-        $user = User::find($request->user_id);
+        $user = User::find($request->id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
@@ -191,7 +191,7 @@ class CrudUserController extends Controller
         // $user->password = $input['password'];
         // $user->save();
 
-        return redirect("list")->withSuccess('You have signed-in');
+        return redirect("list")->withSuccess('Update user successfully!');
     }
 
     /**

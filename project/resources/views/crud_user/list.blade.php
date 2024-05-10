@@ -4,6 +4,19 @@
     <main class="login-form">
         <div class="container">
             <div class="row justify-content-center">
+                <!-- Hiển thị thông báo thành công -->
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <!-- Hiển thị thông báo lỗi -->
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <table>
                     <thead>
                         <tr>
