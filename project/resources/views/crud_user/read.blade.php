@@ -21,7 +21,7 @@
                             <td>{{$messi->name}}</td>
                             <td>{{$messi->email}}</td>
                             <td>{{$messi->phone}}</td>
-                            <td>{{$messi->favorities}}</td>
+                            <td>{!!$messi->favorities!!}</td>
                             <td><img class="img-list" src="{{ asset('images/' . $messi->image) }}" alt="User Image"></td>
 
                         </tr>

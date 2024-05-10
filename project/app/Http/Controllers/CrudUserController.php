@@ -64,6 +64,7 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'favorities' => 'nullable',
             'phone' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -90,6 +91,7 @@ class CrudUserController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
+            'favorities' => $data['favorities'],
             'image' => $data['image'],
         ]);
         //Trở lại trang login và hiển thị thông báo người dùng đăng ký thành công
@@ -143,7 +145,7 @@ class CrudUserController extends Controller
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
             'phone' => 'nullable|string|max:15',
-            'favorities' => 'nullable|string|max:50',
+            'favorities' => 'nullable',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Adjust validation rules for image
         ]);
         // Tải hình ảnh lên

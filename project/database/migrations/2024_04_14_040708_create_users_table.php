@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone')->nullable();
             $table->string('image')->nullable();
-            $table->string('favorities')->nullable();
+            $table->text('favorities')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

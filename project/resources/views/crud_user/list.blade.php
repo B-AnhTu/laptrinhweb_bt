@@ -36,7 +36,7 @@
                 </table>
                 <div class="col mt-3">
                     <!-- Hiển thị thanh phân trang -->
-                    {{ $users->links('pagination::bootstrap-5') }}
+                    {{$users->links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div>

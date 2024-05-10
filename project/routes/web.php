@@ -37,4 +37,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('hacker/xss', 'App\Http\Controllers\XssController@handleXss');
+Route::get('/hacker/xss', 'XssController@handleXss');
