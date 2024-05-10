@@ -14,16 +14,16 @@ class OrdersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // Tạo dữ liệu mẫu cho bảng orders
-        DB::table('orders')->insert([
-            'user_id' => 1, // Thay thế 1 bằng ID của user trong bảng users nếu bạn có dữ liệu người dùng
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('orders')->insert([
-            'user_id' => 2, // Thay thế 1 bằng ID của user trong bảng users nếu bạn có dữ liệu người dùng
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // // Tạo dữ liệu mẫu cho bảng orders
+        // DB::table('orders')->insert([
+        //     'user_id' => 1, // Thay thế 1 bằng ID của user trong bảng users nếu bạn có dữ liệu người dùng
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ]);
+        // DB::table('orders')->insert([
+        //     'user_id' => 2, // Thay thế 1 bằng ID của user trong bảng users nếu bạn có dữ liệu người dùng
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ]);
     }
 }

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CrudUserController;
+use App\Http\Controllers\UserPostController;
+use App\Http\Controllers\UserFavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,7 @@ use App\Http\Controllers\CrudUserController;
 |
 */
 
+// CRUD_User
 Route::get('dashboard', [CrudUserController::class, 'dashboard']);
 
 Route::get('login', [CrudUserController::class, 'login'])->name('login');
@@ -38,3 +41,26 @@ Route::get('/', function () {
 });
 
 Route::get('/hacker/xss', 'XssController@handleXss');
+//Post
+Route::get('createPost', [UserPostController::class, 'createPost'])->name('post.createPost');
+Route::post('createPost', [UserPostController::class, 'postUserPost'])->name('post.postUserPost');
+
+Route::get('readPost', [UserPostController::class, 'readPost'])->name('post.readPost');
+
+Route::get('deletePost', [UserPostController::class, 'deletePost'])->name('post.deletePost');
+
+Route::get('updatePost', [UserPostController::class, 'updatePost'])->name('post.updatePost');
+Route::post('updatePost', [UserPostController::class, 'postUpdatePost'])->name('post.postUpdatePost');
+
+Route::get('listPost', [UserPostController::class, 'listPost'])->name('post.listPost');
+
+//Favorite
+Route::get('createFavorite', [UserFavoriteController::class, 'createFavorite'])->name('favorite.createFavorite');
+Route::post('createFavorite', [UserFavoriteController::class, 'postFavorite'])->name('favorite.postFavorite');
+
+Route::get('updateFavorite', [UserFavoriteController::class, 'updateFavorite'])->name('favorite.updateFavorite');
+Route::post('updateFavorite', [UserFavoriteController::class, 'postUpdateFavorite'])->name('favorite.postUpdateFavorite');
+
+Route::get('readFavorite', [UserFavoriteController::class, 'readFavorite'])->name('favorite.readFavorite');
+
+Route::get('deleteFavorite', [UserFavoriteController::class, 'deleteFavorite'])->name('favorite.deleteFavorite');

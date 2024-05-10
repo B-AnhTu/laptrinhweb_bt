@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Hash;
 use Session;
 use App\Models\User;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,6 +42,13 @@ class CrudUserController extends Controller
         }
         //Nếu đăng nhập thất bại thì hiển thị lỗi
         return redirect("login")->withSuccess('Login details are not valid');
+
+        // // Kiểm tra xem cả hai trường đều không rỗng
+        // if ($request->filled(['email', 'password'])) {
+        //     return redirect()->intended('list')->withSuccess('Signed in directly');
+        // }
+        // return redirect("login")->withError('Please provide both email and password');
+
     }
 
     /**
@@ -71,12 +79,6 @@ class CrudUserController extends Controller
 
         $data = $request->all();
 
-        // Kiểm tra xem 'phone' có được gửi từ form hay không
-        if (!empty($data['phone'])) {
-            // Nếu 'phone' không được gửi từ form, gán giá trị mặc định hoặc null cho 'phone'
-            $data['phone'] = null;
-        }
-
 
         // Xử lý tải lên hình ảnh
         if ($request->hasFile('image')) {
@@ -105,19 +107,39 @@ class CrudUserController extends Controller
         //Lấy id của người dùng cần đọc và tìm đúng id đó
         $user_id = $request->get('id');
         $user = User::find($user_id);
-        //Đường dẫn đến trang view với biến truyền đi là messi
-        return view('crud_user.read', ['messi' => $user]);
+        //Đường dẫn đến trang view với biến truyền đi là user
+        return view('crud_user.read', ['user' => $user]);
     }
 
     /**
      * Delete user by id
      */
     public function deleteUser(Request $request) {
-        //Lấy id của người dùng cần xóa
         $user_id = $request->get('id');
-        $user = User::destroy($user_id);
-        //Trở lại trang danh sách
-        return redirect("list")->withSuccess('You have signed-in');
+
+        $isDelete = false;
+        //Check existing post
+        $post = Posts::where('user_id', '=', $user_id)->first();
+
+        //Check existing favorite
+        $favorities = User::find($user_id)->favorities;
+
+        if (empty ($post) && $favorities->isEmpty()) {
+            $isDelete = true;
+        }
+
+        if ($isDelete) {
+            $user = User::destroy($user_id);
+
+        }
+
+        return redirect("crud_user.list")->withSuccess('Delete successful');
+
+        // //Lấy id của người dùng cần xóa
+        // $user_id = $request->get('id');
+        // $user = User::destroy($user_id);
+        // //Trở lại trang danh sách
+        // return redirect("list")->withSuccess('You have signed-in');
     }
 
     /**
@@ -140,7 +162,7 @@ class CrudUserController extends Controller
         //Lấy tất cả thông tin trong database
         $input = $request->all();
         //Kiểm tra các trường dữ liệu hợp lệ
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
@@ -173,7 +195,7 @@ class CrudUserController extends Controller
         // $user->password = $input['password'];
         // $user->save();
 
-        return redirect("list")->withSuccess('You have signed-in');
+        return redirect("list")->withSuccess('Update user successfully!');
     }
 
     /**

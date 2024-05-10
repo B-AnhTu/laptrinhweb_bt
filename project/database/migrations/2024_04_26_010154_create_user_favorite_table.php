@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            // $table->unsignedBigInteger('user_id'); // Mã user kiểu int
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Tạo khóa ngoại với bảng users
+        Schema::create('user_favorite', function (Blueprint $table) {
+            $table->increments('user_favorite_id');
+            $table->integer('user_id');
+            $table->integer('favorite_id');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('user_favorite');
     }
 };

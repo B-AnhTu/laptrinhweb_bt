@@ -32,6 +32,7 @@
                     <a class="nav-link" href="{{route('user.createUser')}}">Đăng ký</a>
                   </li>
                   @else
+                  
                   <li class="nav-item">|</li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('signout')}}">Đăng xuất</a>
@@ -52,5 +53,7 @@
             </div>
         </div>
     </footer>
+    <script src="https://kit.fontawesome.com/8d630c67fe.js" crossorigin="anonymous"></script>
+    <script src="public/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
