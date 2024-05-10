@@ -11,6 +11,7 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Sở thích</th>
                             <th>Hinh anh</th>
                             <th>Thao tác</th>
                         </tr>
@@ -22,6 +23,7 @@
                                 <th>{{ $user->name }}</th>
                                 <th>{{ $user->email }}</th>
                                 <th>{{ $user->phone }}</th>
+                                <th>{{ $user->favorities }}</th>
                                 <th><img class="img-list" src="{{ asset('images/' . $user->image) }}" alt="User Image"></th>
                                 <th>
                                     <a href="{{ route('user.readUser', ['id' => $user->id]) }}">View</a> |
@@ -34,7 +36,7 @@
                 </table>
                 <div class="col mt-3">
                     <!-- Hiển thị thanh phân trang -->
-                    {{ $users->links('pagination::bootstrap-5') }}
+                    {{$users->links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div>
