@@ -2,8 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use Exception;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Access\AuthorizationException;
+
+
 
 class Authenticate extends Middleware
 {
